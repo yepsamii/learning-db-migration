@@ -33,12 +33,12 @@ async function createMigration() {
  * Created: ${date}
  */
 
-exports.up = (pgm) => {
+export const up = (pgm) => {
   // TODO: Write your migration here
   
 };
 
-exports.down = (pgm) => {
+export const down = (pgm) => {
   // TODO: Write rollback logic here
   
 };
