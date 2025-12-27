@@ -6,10 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "migrate:up": "node-pg-migrate up",
-    "migrate:down": "node-pg-migrate down",
-    "migrate:create": "node-pg-migrate create",
-    "migrate:status": "node-pg-migrate status -m migrations"
+    "migrate:status": "node scripts/migration-status.js",
+    "migrate:create": "node scripts/create-migration.js",
+    "migrate:up": "node-pg-migrate up -m migrations",
+    "migrate:down": "node-pg-migrate down -m migrations",
+    "migrate:redo": "node-pg-migrate redo -m migrations",
+    "migrate:history": "node scripts/migration-history.js"
   },
   "keywords": [
     "todo",
