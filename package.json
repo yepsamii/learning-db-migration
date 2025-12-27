@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "migrate:up": "node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
-    "migrate:create": "node-pg-migrate create"
+    "migrate:create": "node-pg-migrate create",
+    "migrate:status": "node-pg-migrate status -m migrations"
   },
   "keywords": [
     "todo",
@@ -17,6 +18,7 @@
   ],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

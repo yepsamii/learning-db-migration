@@ -2,10 +2,10 @@ db:
 	@docker exec -it todo_db bash
 
 migrate-up:
-	@npm run migrate:up
+	@DATABASE_URL=postgres://postgres:postgres@localhost:5432/todo_db npm run migrate:up
 
 migrate-down:
-	@npm run migrate:down
+	@DATABASE_URL=postgres://postgres:postgres@localhost:5432/todo_db npm run migrate:down
 
 migrate-create:
 	@npm run migrate:create $(name)
