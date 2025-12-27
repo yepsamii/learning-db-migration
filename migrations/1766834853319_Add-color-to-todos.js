@@ -6,8 +6,8 @@
 
 export const up = (pgm) => {
   // TODO: Write your migration here
-  pgm.addColumn("color", {
-    priority: {
+  pgm.addColumn("todos", {
+    color: {
       type: "varchar(20)",
       default: "blue",
     },
