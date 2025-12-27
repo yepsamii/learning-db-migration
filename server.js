@@ -1,9 +1,8 @@
 // Load environment variables
-require("dotenv").config();
-
-const express = require("express");
-const cors = require("cors");
-const { Pool } = require("pg");
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import { Pool } from "pg";
 
 // Create Express app
 const app = express();
