@@ -62,15 +62,21 @@ app.get("/api/todos/:id", async (req, res) => {
 // POST create a new todo
 app.post("/api/todos", async (req, res) => {
   try {
-    const { task } = req.body;
+    const { task, priority = "medium" } = req.body;
 
     if (!task || task.trim() === "") {
       return res.status(400).json({ error: "Task is required" });
     }
 
+    // Validate priority
+    const validPriorities = ["low", "medium", "high", "urgent"];
+    if (!validPriorities.includes(priority)) {
+      return res.status(400).json({ error: "Invalid priority level" });
+    }
+
     const result = await pool.query(
-      "INSERT INTO todos (task) VALUES ($1) RETURNING *",
-      [task.trim()]
+      "INSERT INTO todos (task, priority, status) VALUES ($1, $2, $3) RETURNING *",
+      [task.trim(), priority, "pending"]
     );
 
     res.status(201).json(result.rows[0]);
@@ -84,7 +90,7 @@ app.post("/api/todos", async (req, res) => {
 app.put("/api/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { task, completed } = req.body;
+    const { task, status, priority } = req.body;
 
     let query = "UPDATE todos SET ";
     const values = [];
@@ -95,9 +101,22 @@ app.put("/api/todos/:id", async (req, res) => {
       values.push(task.trim());
     }
 
-    if (completed !== undefined) {
-      updates.push(`completed = $${values.length + 1}`);
-      values.push(completed);
+    if (status !== undefined) {
+      const validStatuses = ["pending", "done"];
+      if (!validStatuses.includes(status)) {
+        return res.status(400).json({ error: "Invalid status" });
+      }
+      updates.push(`status = $${values.length + 1}`);
+      values.push(status);
+    }
+
+    if (priority !== undefined) {
+      const validPriorities = ["low", "medium", "high", "urgent"];
+      if (!validPriorities.includes(priority)) {
+        return res.status(400).json({ error: "Invalid priority level" });
+      }
+      updates.push(`priority = $${values.length + 1}`);
+      values.push(priority);
     }
 
     if (updates.length === 0) {
