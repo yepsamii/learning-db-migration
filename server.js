@@ -16,7 +16,8 @@ import {
   deleteTodo,
 } from "./controllers/todo.js";
 import { pool } from "./config/db.js";
-
+import { promMiddleware } from "./middleware/prom.js";
+import { getMetrics } from "./controllers/metrics.js";
 // Create Express app
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+app.use(promMiddleware);
 
 // Test database connection
 pool.on("connect", () => {
@@ -32,7 +34,7 @@ pool.on("connect", () => {
 });
 
 // Routes
-
+app.get("/metrics", getMetrics);
 // GET all todos
 app.get("/api/todos", getTodos);
 
