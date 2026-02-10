@@ -1,3 +1,9 @@
+import {
+  httpRequestsTotal,
+  httpRequestDuration,
+  activeRequests,
+} from "../metrics.js";
+
 export const promMiddleware = (req, res, next) => {
   activeRequests.inc();
   const end = httpRequestDuration.startTimer();

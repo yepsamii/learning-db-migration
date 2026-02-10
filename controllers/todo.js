@@ -1,3 +1,5 @@
+import { pool } from "../config/db.js";
+
 const getTodos = async (req, res) => {
   try {
     const result = await pool.query(

@@ -2,12 +2,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import {
-  client,
-  httpRequestsTotal,
-  httpRequestDuration,
-  activeRequests,
-} from "./metrics.js";
+
 import {
   createTodo,
   getTodos,
