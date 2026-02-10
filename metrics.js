@@ -27,7 +27,7 @@ const dbErrorsTotal = new client.Counter({
   labelNames: ["operation"],
 });
 
-export default {
+export {
   client,
   httpRequestsTotal,
   httpRequestDuration,

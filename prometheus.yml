@@ -22,4 +22,4 @@ scrape_configs:
   # Scrape your to-do backend
   - job_name: "todo_backend"
     static_configs:
-      - targets: [backend:3000"]
+      - targets: ["backend:3000"]
