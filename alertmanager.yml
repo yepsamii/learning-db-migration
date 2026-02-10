@@ -1,0 +1,15 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  group_by: ["alertname", "severity"]
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: "webhook-test"
+
+receivers:
+  - name: "webhook-test"
+    webhook_configs:
+      - url: "https://webhook.site/5700e671-9481-4ab6-b98e-6650449dfb25" # get a free URL at webhook.site
+        send_resolved: true
